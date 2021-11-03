@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Example: Open on focus</title>
+		<style>
+			.combobox-input {
+				width: 400;
+				font-size: 100%;
+				padding: 0.33rem;
+			};
+
+			.combobox-popup {
+				box-shadow: 0px 2px 6px hsla(0, 0%, 0%, 0.15);
+				border: none;
+			};
+
+			.combobox-option {
+				margin: 0;
+  			padding: 0.25rem 0.5rem;
+			}
+			.combobox-option:hover{
+				background: hsl(211, 10%, 92%);
+			}
+			.combobox-option[aria-selected="true"] {
+				background: hsl(211, 10%, 95%);
+			}
+			.combobox-option[aria-selected="true"]:hover {
+				background: hsl(211, 10%, 90%);
+			}
+			.combobox-option [data-user-value] {
+				font-weight: bold;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="root"></div>
+		<script type="module">
+			import ReactDOM from 'react-dom';
+			import { Example } from './index.js';
+			const root = document.getElementById('root');
+			ReactDOM.render(<Example />, root);
+		</script>
+	</body>
+</html>
