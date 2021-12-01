@@ -15,7 +15,7 @@
     "require": "./dist/react-lit-combobox.cjs",
     "import": "./dist/react-lit-combobox.modern.js"
   },
-  "types": "dist/index.d.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "LICENSE"
