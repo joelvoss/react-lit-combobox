@@ -577,7 +577,8 @@ export const ComboboxList = React.forwardRef(
 		},
 		parentRef,
 	) => {
-		const { persistSelectionRef, listboxId } = React.useContext(ComboboxContext);
+		const { persistSelectionRef, listboxId } =
+			React.useContext(ComboboxContext);
 
 		if (persistSelection) {
 			persistSelectionRef.current = true;
@@ -629,7 +630,10 @@ export const ComboboxOption = React.forwardRef(
 		const ownRef = React.useRef(null);
 
 		const [element, handleRefSet] = useStatefulRefValue(ownRef, null);
-		const descendant = React.useMemo(() => ({ element, value }), [value, element]);
+		const descendant = React.useMemo(
+			() => ({ element, value }),
+			[value, element],
+		);
 		const index = useDescendant(
 			descendant,
 			ComboboxDescendantContext,
@@ -1055,7 +1059,8 @@ export function escapeRegexp(str) {
  * @returns {ComboboxContextValue}
  */
 export function useComboboxContext() {
-	let { isExpanded, comboboxId, data, state } = React.useContext(ComboboxContext);
+	let { isExpanded, comboboxId, data, state } =
+		React.useContext(ComboboxContext);
 	let { navigationValue } = data;
 	return React.useMemo(
 		() => ({
