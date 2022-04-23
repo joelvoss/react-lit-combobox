@@ -13,7 +13,7 @@ import {
 
 describe('<Combobox />', () => {
 	describe('rendering', () => {
-		it('renders as any HTML element', () => {
+		it('renders as any HTML element', async () => {
 			function Comp() {
 				let [term, setTerm] = React.useState('');
 				let results = useCityMatch(term);
@@ -48,13 +48,13 @@ describe('<Combobox />', () => {
 			expect(getByTestId('box').tagName).toBe('SPAN');
 			expect(getByRole('combobox').tagName).toBe('TEXTAREA');
 
-			userEvent.type(getByRole('combobox'), 'e');
+			await userEvent.type(getByRole('combobox'), 'e');
 
 			expect(getByRole('listbox').tagName).toBe('DIV');
 			expect(getAllByRole('option')[0].tagName).toBe('DIV');
 		});
 
-		it('renders when using the useComboboxContext hook', () => {
+		it('renders when using the useComboboxContext hook', async () => {
 			function CustomComboboxInput(props) {
 				const { isExpanded } = useComboboxContext();
 				return (
@@ -85,7 +85,7 @@ describe('<Combobox />', () => {
 
 			let { getByRole, getAllByRole } = render(<Comp />);
 
-			userEvent.type(getByRole('combobox'), 'a');
+			await userEvent.type(getByRole('combobox'), 'a');
 
 			expect(getByRole('listbox')).toBeTruthy();
 			expect(getAllByRole('option')[0]).toBeTruthy();
@@ -93,7 +93,7 @@ describe('<Combobox />', () => {
 	});
 
 	describe('a11y', () => {
-		it('should forward aria-label from Combobox to ComboboxInput', () => {
+		it('should forward aria-label from Combobox to ComboboxInput', async () => {
 			function Comp() {
 				return (
 					<Combobox aria-label="choose a fruit">
@@ -115,7 +115,7 @@ describe('<Combobox />', () => {
 			expect(input.getAttribute('aria-label')).toBe('choose a fruit');
 		});
 
-		it('should forward aria-labelledby from Combobox to ComboboxInput', () => {
+		it('should forward aria-labelledby from Combobox to ComboboxInput', async () => {
 			function Comp() {
 				return (
 					<div>
@@ -162,7 +162,7 @@ describe('<Combobox />', () => {
 			expect(input.getAttribute('aria-label')).toBe('label set on input');
 		});
 
-		it('aria-labelledby set on ComboboxInput should take precedence', () => {
+		it('aria-labelledby set on ComboboxInput should take precedence', async () => {
 			function Comp() {
 				return (
 					<div>
@@ -190,7 +190,7 @@ describe('<Combobox />', () => {
 	});
 
 	describe('user events', () => {
-		it('should open a list on text entry', () => {
+		it('should open a list on text entry', async () => {
 			function Comp() {
 				let [term, setTerm] = React.useState('');
 				let results = useCityMatch(term);
@@ -221,7 +221,7 @@ describe('<Combobox />', () => {
 			let getByTextWithMarkup = withMarkup(getByText);
 			let input = getByRole('combobox');
 
-			userEvent.type(input, 'e');
+			await userEvent.type(input, 'e');
 
 			expect(getByRole('listbox')).toBeInTheDocument();
 			expect(getByTextWithMarkup(optionToSelect)).toBeInTheDocument();
@@ -237,8 +237,4 @@ function useCityMatch(term) {
 		: matchSorter(cities, term, {
 				keys: [item => `${item.city}, ${item.state}`],
 		  });
-}
-
-function showOpts(results, render) {
-	return results.slice(0, 10).map((result, index) => render({ result, index }));
 }
